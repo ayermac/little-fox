@@ -13,6 +13,7 @@ public class PlayerController : MonoBehaviour
     public LayerMask ground;
 
     private bool SpaceKeyDown = false;
+    public int Cherry;
    
 
     // Start is called before the first frame update
@@ -81,6 +82,15 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetBool("falling", false);
             anim.SetBool("idle", true);
+        }
+    }
+
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.tag == "Collection")
+        {
+            Destroy(collision.gameObject);
+            Cherry++;
         }
     }
 }
