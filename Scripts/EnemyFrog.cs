@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyFrogController : MonoBehaviour
+public class EnemyFrog : Enemy
 {
     private Rigidbody2D rb;
-    private Animator anim;
+    //private Animator anim;
     public Collider2D coll;
 
     public Transform leftPoint, rightPoint;
@@ -16,10 +16,11 @@ public class EnemyFrogController : MonoBehaviour
     private bool FaceLeft = true;
 
     // Start is called before the first frame update
-    void Start()
+    protected override void Start()
     {
+        base.Start();
         rb = GetComponent<Rigidbody2D>();
-        anim = GetComponent<Animator>();
+        //anim = GetComponent<Animator>();
         coll = GetComponent<Collider2D>();
 
         transform.DetachChildren();
