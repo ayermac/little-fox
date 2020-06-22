@@ -5,11 +5,13 @@ using UnityEngine;
 public class Enemy : MonoBehaviour
 {
     protected Animator anim;
+    protected AudioSource deathAudio;
 
     // Start is called before the first frame update
     protected virtual void Start()
     {
         anim = GetComponent<Animator>();
+        deathAudio = GetComponent<AudioSource>();
     }
 
     public void Death()
@@ -20,5 +22,6 @@ public class Enemy : MonoBehaviour
     public void JumpOn()
     {
         anim.SetTrigger("death");
+        deathAudio.Play();
     }
 }

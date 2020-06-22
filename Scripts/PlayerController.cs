@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class PlayerController : MonoBehaviour
 {
     private Rigidbody2D rb;
     private Animator anim;
     public Collider2D coll;
+    public AudioSource jumpAudio, hurtAudio, cherryAudio;
 
     public float speed;
     public float jumpforce;
@@ -61,6 +63,7 @@ public class PlayerController : MonoBehaviour
         // 角色跳跃
         if (SpaceKeyDown && coll.IsTouchingLayers(ground))
         {
+            jumpAudio.Play();
             rb.velocity = new Vector2(rb.velocity.x, jumpforce * Time.deltaTime);
             anim.SetBool("jumping", true);
             SpaceKeyDown = false;
@@ -115,6 +118,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collision.tag == "Collection")
         {
+            cherryAudio.Play();
             Destroy(collision.gameObject);
             Cherry++;
             CherryNum.text = Cherry.ToString();
@@ -138,11 +142,13 @@ public class PlayerController : MonoBehaviour
             else if (transform.position.x < collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(-10, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
             }
             else if (transform.position.x > collision.gameObject.transform.position.x)
             {
                 rb.velocity = new Vector2(10, rb.velocity.y);
+                hurtAudio.Play();
                 isHurt = true;
             }
 
